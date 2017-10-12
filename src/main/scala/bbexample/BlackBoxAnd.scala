@@ -1,6 +1,6 @@
 // See LICENSE for license details.
 
-package essan
+package bbexample
 
 
 import chisel3._
@@ -13,7 +13,7 @@ class BBAnd extends BlackBox with HasBlackBoxResource {
     val b=  Input(Bool())
     val result = Output(Bool())
   })
-  val blackBoxFloatVerilog = "/essan/BBAnd.v"
+  val blackBoxFloatVerilog = "/bbexample/BBAnd.v"
   setResource(blackBoxFloatVerilog)
 }
 

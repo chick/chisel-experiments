@@ -36,7 +36,7 @@ class HashMaker(keySize: Int, tableRows: Int, w: Double, b: Double, weights: Arr
       }
       (rowSum + b) / w
     }
-    intermediateSums.reduce(_ + _)
+    intermediateSums.sum
   }
 }
 
@@ -44,8 +44,9 @@ class HashMaker(keySize: Int, tableRows: Int, w: Double, b: Double, weights: Arr
 /**
   * This is a simple hardware version of the above HashMaker
   * To avoid the
-
+  *
   */
+//noinspection ScalaStyle,TypeAnnotation
 class HardwareHashMaker(val fixedType: FixedPoint,
                         val keySize: Int,
                         val hashDepth: Int,
@@ -86,6 +87,7 @@ class HardwareHashMaker(val fixedType: FixedPoint,
 }
 
 
+//noinspection ScalaStyle
 class HashFunctionTester(c: HardwareHashMaker) extends PeekPokeTester(c) {
 //  val hashMaker = new HashMaker(c.keySize, c.hashDepth, c.w, c.b, c.weights)
 //
@@ -93,7 +95,7 @@ class HashFunctionTester(c: HardwareHashMaker) extends PeekPokeTester(c) {
 //    key.zipWithIndex.foreach { case (v, i) => pokeFixedPoint(c.io.x(i), v) }
 //    step(1)
 //
-//    println(f"hash of (${key.mkString(",")}) is ${peekFixedPoint(c.io.out)}%20.10f scala says ${hashMaker(key)}%20.10f")
+//  println(f"hash of (${key.mkString(",")}) is ${peekFixedPoint(c.io.out)}%20.10f scala says ${hashMaker(key)}%20.10f")
 //  }
 //
 //  oneTest(Array.fill(c.keySize)(0.0))
@@ -102,6 +104,7 @@ class HashFunctionTester(c: HardwareHashMaker) extends PeekPokeTester(c) {
 
 }
 
+//scalastyle:off magic.number
 class HashFunctionSpec extends FreeSpec with Matchers {
   Random.setSeed(0L)
 
@@ -167,7 +170,6 @@ class HashFunctionSpec extends FreeSpec with Matchers {
     val values = io.Source.fromFile("ionosphere.data.txt").getLines().map { line =>
       val fields = line.split(",")
       val key = fields.take(keySize).map { s => s.trim.toDouble }
-      val letter = fields.last
 
       val hash = hashMaker(key)
 //      println(f"Got: $hash%10.5f $letter from ${key.mkString(",")}")

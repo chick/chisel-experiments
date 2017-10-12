@@ -46,7 +46,7 @@
    <parameter name="maxParameters"><![CDATA[8]]></parameter>
   </parameters>
  </check>
- <check level="warning" class="org.scalastyle.scalariform.MagicNumberChecker" enabled="true">
+ <check level="warning" class="org.scalastyle.scalariform.MagicNumberChecker" enabled="false">
   <parameters>
    <parameter name="ignore"><![CDATA[-1,0,1,2,8,10,16]]></parameter>
   </parameters>
@@ -65,7 +65,7 @@
   </parameters>
   <customMessage>No lines ending with a ;</customMessage>
  </check>
- <check level="warning" class="org.scalastyle.file.RegexChecker" enabled="true">
+ <check level="warning" class="org.scalastyle.file.RegexChecker" enabled="false">
   <parameters>
    <parameter name="regex"><![CDATA[println]]></parameter>
   </parameters>
@@ -104,7 +104,7 @@
    <parameter name="maxMethods"><![CDATA[30]]></parameter>
   </parameters>
  </check>
- <check level="warning" class="org.scalastyle.scalariform.PublicMethodsHaveTypeChecker" enabled="true"></check>
+ <check level="warning" class="org.scalastyle.scalariform.PublicMethodsHaveTypeChecker" enabled="false"></check>
  <check level="warning" class="org.scalastyle.file.NewLineAtEofChecker" enabled="true"></check>
  <check level="warning" class="org.scalastyle.file.NoNewLineAtEofChecker" enabled="false"></check>
 </scalastyle>

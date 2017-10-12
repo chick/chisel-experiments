@@ -72,7 +72,7 @@ class Sort(val inputSize: Int, val outputSize: Int, fixedType: FixedPoint, rever
 class SortTester(c: Sort) extends PeekPokeTester(c) {
 
 
-  def showOutputs: Unit = {
+  def showOutputs(): Unit = {
     for(i <- 0 until c.outputSize) {
       print(f"${peekFixedPoint(c.io.outputs(i))}%10.5f ")
     }
@@ -88,11 +88,11 @@ class SortTester(c: Sort) extends PeekPokeTester(c) {
   step(1)
 
   while(peek(c.io.sortDone) == 0) {
-    showOutputs
+    showOutputs()
     step(1)
   }
 
-  showOutputs
+  showOutputs()
 
 
 }

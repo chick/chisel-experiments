@@ -1,6 +1,6 @@
 // See LICENSE for license details.
 
-package examples
+package incrementer
 
 import org.scalatest.FreeSpec
 import chisel3._
@@ -15,6 +15,7 @@ class ReadyValidUInt32 extends Bundle {
 }
 
 class SlowIncrementer extends Module {
+  //noinspection TypeAnnotation
   val io = IO(new Bundle {
     // Number of cycles to delay.
     val delay = Input(UInt(8.W))
