@@ -80,7 +80,7 @@ class HardwareHashMaker(val fixedType: FixedPoint,
     }
 
     (sum + offset).setBinaryPoint(newBinaryPoint)
-    //    ((sum + offset).asUInt() >> shiftDivider).asFixedPoint(fixedType.binaryPoint)
+    //    ((sum + offset).asUInt() >> shiftDivider).asFixedPoint(elementType.binaryPoint)
   }
 
   io.out := intermediateSums.reduce(_ + _)
