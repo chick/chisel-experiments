@@ -21,7 +21,6 @@ class MostFrequentlyOccurring(val elementCount: Int, val uIntSize: Int) extends 
     val done = Output(Bool())
   })
 
-
   /**
     * First we compute sums, a list of how many occurrences of the number at index occur from that index
     * to the right end of the inputs.
@@ -51,11 +50,11 @@ class MostFrequentlyOccurring(val elementCount: Int, val uIntSize: Int) extends 
 class MostFrequentlyOccurringTester(c: MostFrequentlyOccurring) extends PeekPokeTester(c) {
   val inputVectors = Seq(
     Seq(1, 1, 1, 2, 2, 3, 4, 1, 5, 2, 4, 7).take(c.elementCount),
-    Seq(1, 1, 1, 3, 3, 3, 2, 2, 2, 4, 4, 4).take(c.elementCount),
+    Seq(1, 1, 1, 3, 3, 3, 2, 2, 2, 2, 2, 2).take(c.elementCount),
     Seq(1, 4, 1, 4, 2, 4, 2, 3, 4, 3, 3, 4).take(c.elementCount),
     Seq(1, 3, 1, 3, 2, 3, 2, 3, 4, 3, 3, 4).take(c.elementCount)
   )
-  val expectedValues = Seq(1, 4, 4, 3)
+  val expectedValues = Seq(1, 2, 4, 3)
 
   inputVectors.zip(expectedValues).foreach { case (inputVector, expectedValue) =>
     println("inputs" + inputVector.map { x => f"$x%4d"}.mkString(" "))
@@ -65,14 +64,22 @@ class MostFrequentlyOccurringTester(c: MostFrequentlyOccurring) extends PeekPoke
     }
     step(1)
 
-    println(s"Most frequently occurring value is ${peek(c.io.mostFrequentlyOccurringValue)}\n\n\n")
+    if(peek(c.io.mostFrequentlyOccurringValue) != expectedValue) {
+      println(s"ERROR: MFO value is ${peek(c.io.mostFrequentlyOccurringValue)} Should be $expectedValue\n\n\n")
+    }
+    else {
+      println(s"MFO value is ${peek(c.io.mostFrequentlyOccurringValue)}\n\n\n")
+    }
     expect(c.io.mostFrequentlyOccurringValue, expectedValue)
+
+    step(1)
   }
 }
 
 object MostFrequentlyOccurring {
   def main(args: Array[String]): Unit = {
     iotesters.Driver.execute(Array.empty, () => new MostFrequentlyOccurring(elementCount = 10, uIntSize = 8)) { c =>
+//    iotesters.Driver.execute(Array("--backend-name", "verilator"), () => new MostFrequentlyOccurring(elementCount = 10, uIntSize = 8)) { c =>
       new MostFrequentlyOccurringTester(c)
     }
   }
