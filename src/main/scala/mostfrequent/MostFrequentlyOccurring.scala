@@ -4,7 +4,7 @@ package mostfrequent
 
 import chisel3._
 import chisel3.iotesters.PeekPokeTester
-import sort.{CombinationalSortIndexAndTake}
+import sort.CombinationalSortIndexAndTake
 
 /**
   * A surprisingly complicated way of determining the most frequently occurring number in a
