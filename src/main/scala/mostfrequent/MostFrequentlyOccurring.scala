@@ -26,12 +26,11 @@ class MostFrequentlyOccurring(val elementCount: Int, val uIntSize: Int) extends 
     * to the right end of the inputs.
     * We need to create a temp with a known size to make sure we get UInt's big enough to contain sum (why is this?)
     */
+
   val sums = io.input.indices.map { index =>
     io.input.drop(index).map { x =>
-      val temp = Wire(UInt((uIntSize*2).W))
-      temp := (x === io.input(index)).asUInt
-      temp
-    }.reduce(_ + _)
+      (x === io.input(index)).asUInt
+    }.reduce(_ +& _)
   }
 
   printf("Sums: " + ("%d  " * sums.length) + "\n", sums:_* )
